@@ -1,0 +1,33 @@
+###> symfony/framework-bundle ###
+fruity-mania/.env.local
+fruity-mania/.env.local.php
+fruity-mania/config/secrets/prod/prod.decrypt.private.php
+fruity-mania/public/bundles/
+fruity-mania/var/
+fruity-mania/vendor/
+###< symfony/framework-bundle ###
+
+
+fruity_mania_app/.DS_Store
+fruity_mania_app/node_modules
+fruity_mania_app/dist
+
+
+# local env files
+fruity_mania_app/.env.local
+fruity_mania_app/.env.*.local
+
+# Log files
+fruity_mania_app/npm-debug.log*
+fruity_mania_app/yarn-debug.log*
+fruity_mania_app/yarn-error.log*
+fruity_mania_app/pnpm-debug.log*
+
+# Editor directories and files
+fruity_mania_app/.idea
+fruity_mania_app/.vscode
+fruity_mania_app/*.suo
+fruity_mania_app/*.ntvs*
+fruity_mania_app/*.njsproj
+fruity_mania_app/*.sln
+fruity_mania_app/*.sw?
