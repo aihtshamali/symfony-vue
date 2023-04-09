@@ -4,6 +4,7 @@ fruity-mania/.env.local.php
 fruity-mania/config/secrets/prod/prod.decrypt.private.php
 fruity-mania/public/bundles/
 fruity-mania/var/
+fruity-mania/.env
 fruity-mania/vendor/
 ###< symfony/framework-bundle ###
 
