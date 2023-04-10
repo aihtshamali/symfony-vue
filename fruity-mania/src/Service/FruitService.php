@@ -12,9 +12,10 @@ class FruitService
     public function __construct(private FruitRepository $fruitRepository)
     {}
 
-    public function findAll(): string
+    public function paginatedFruits($limit, $offset): string
     {
-        $fruits = $this->fruitRepository->findAll();
+        $fruits['fruits'] = $this->fruitRepository->paginatedFruits($limit, $offset);
+        $fruits['totalRecords'] = $this->fruitRepository->count([]);
         $serializer = $this->handleCircularReferences();
         
         return $serializer->serialize($fruits, 'json');

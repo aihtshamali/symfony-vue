@@ -6,13 +6,17 @@ export const useMainStore = defineStore({
   state: () => ({
     fruits: [],
     favoriteFruits: [],
+    totalFruits: 0,
   }),
   getters: {},
   actions: {
-    fetchFruits() {
-      apiClient.get("http://localhost:8000/fruits/all").then((response) => {
-        this.fruits = response.data;
-      });
+    fetchFruits(limit = 10, offset = 0) {
+      apiClient
+        .get(`http://localhost:8000/fruits/all?limit=${limit}&offset=${offset}`)
+        .then((response) => {
+          this.fruits = response.data.fruits;
+          this.totalFruits = response.data.totalRecords;
+        });
     },
     addToFavorites(fruit) {
       if (this.favoriteFruits.length < 10) {

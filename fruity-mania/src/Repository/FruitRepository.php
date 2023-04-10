@@ -39,11 +39,16 @@ class FruitRepository extends ServiceEntityRepository
         }
     }
 
-    public function fruitsWithNutrition()
+    public function paginatedFruits($limit, $offset)
     {
+        $qb = $this->createQueryBuilder('fruit')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->getQuery();
 
+        return $qb->execute();    
     }
-
+    
 //    /**
 //     * @return Fruit[] Returns an array of Fruit objects
 //     */

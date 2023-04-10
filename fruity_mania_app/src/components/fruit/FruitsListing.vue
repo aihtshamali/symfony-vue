@@ -4,9 +4,9 @@ import { useMainStore } from "@/stores/mainStore";
 
 const mainStore = useMainStore();
 const multipleTableRef = ref();
-const currentPage = ref(1);
 const searchByName = ref("");
 const searchByFamily = ref("");
+const pageLimit = 10;
 
 const favoritesLimitExceed = computed(() => {
   return mainStore.favoriteFruits?.length >= 10 ? true : false;
@@ -19,10 +19,10 @@ const isFruitPin = (fruit) => {
 };
 
 const onPageChange = (newPage) => {
-  currentPage.value = newPage;
+  mainStore.fetchFruits(pageLimit, (newPage - 1) * pageLimit);
 };
 
-const paginatedFruitRows = computed(() => {
+const fruitRows = computed(() => {
   let fruits = [];
   if (searchByName.value || searchByFamily.value) {
     fruits = mainStore.fruits.filter((fruit) => {
@@ -39,9 +39,7 @@ const paginatedFruitRows = computed(() => {
     fruits = mainStore.fruits;
   }
 
-  const start = (currentPage.value - 1) * 10;
-  const end = start + 10;
-  return fruits.slice(start, end);
+  return fruits;
 });
 
 onMounted(() => {
@@ -66,7 +64,7 @@ onMounted(() => {
         clearable
       />
     </div>
-    <el-table class="t-mt-4" ref="multipleTableRef" :data="paginatedFruitRows">
+    <el-table class="t-mt-4" ref="multipleTableRef" :data="fruitRows">
       <el-table-column property="name" label="Name" />
       <el-table-column property="genus" label="Genus" />
       <el-table-column property="family" label="Family" />
@@ -96,8 +94,7 @@ onMounted(() => {
       background
       style="margin-top: 16px"
       layout="prev, pager, next"
-      :total="mainStore.fruits.length"
-      :current-page="currentPage"
+      :total="mainStore.totalFruits"
       @update:current-page="onPageChange"
     />
   </div>
